@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Audit QA | Karim Sabri – Rapport interactif</title>
+  <!-- Google Fonts + Tailwind + Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- AOS Library pour animations au scroll -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    * { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+    body {
+      background: radial-gradient(circle at 10% 30%, #0a0f1c, #03060c);
+      background-attachment: fixed;
+    }
+    /* Glassmorphism réutilisable */
+    .glass-card {
+      background: rgba(20, 30, 45, 0.4);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 2rem;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .glass-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      border-color: rgba(100, 150, 255, 0.4);
+    }
+    .glass-panel {
+      background: rgba(15, 25, 40, 0.55);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,240,0.1);
+      border-radius: 1.75rem;
+    }
+    .badge-critical {
+      background: rgba(220, 38, 38, 0.2);
+      border-left: 4px solid #ef4444;
+      color: #fecaca;
+    }
+    .badge-major {
+      background: rgba(249, 115, 22, 0.2);
+      border-left: 4px solid #f97316;
+      color: #fed7aa;
+    }
+    .badge-minor {
+      background: rgba(234, 179, 8, 0.2);
+      border-left: 4px solid #eab308;
+      color: #fef08a;
+    }
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #FFFFFF, #94a3f8);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .progress-bar-fill {
+      transition: width 1s cubic-bezier(0.22, 0.97, 0.36, 1.02);
+    }
+    .custom-scroll::-webkit-scrollbar {
+      width: 6px;
+    }
+    .custom-scroll::-webkit-scrollbar-track {
+      background: #1e293b;
+      border-radius: 8px;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: #3b82f6;
+      border-radius: 8px;
+    }
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+      100% { transform: translateY(0px); }
+    }
+    .animate-float {
+      animation: float 5s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body class="text-gray-200 custom-scroll">
+
+  <!-- Navigation flottante épurée -->
+  <nav class="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-[90%] max-w-5xl glass-card rounded-full px-6 py-2 shadow-2xl backdrop-blur-md bg-black/30 border border-white/10">
+    <div class="flex flex-wrap items-center justify-between">
+      <div class="flex items-center gap-2">
+        <i class="fas fa-clipboard-list text-indigo-300 text-xl"></i>
+        <span class="font-semibold tracking-tight text-white">Karim Sabri — <span class="text-indigo-300">Audit QA</span></span>
+      </div>
+      <div class="flex gap-5 text-sm font-medium">
+        <a href="#resume" class="hover:text-indigo-300 transition hidden md:inline-block">Synthèse</a>
+        <a href="#anomalies" class="hover:text-indigo-300 transition">Anomalies</a>
+        <a href="#securite" class="hover:text-indigo-300 transition">Sécurité</a>
+        <a href="#conclusion" class="hover:text-indigo-300 transition">Conclusion</a>
+      </div>
+      <div>
+        <i class="fas fa-file-pdf text-indigo-300/70 text-sm"></i>
+        <span class="text-xs ml-1 opacity-70">Rapport complet</span>
+      </div>
+    </div>
+  </nav>
+
+  <main class="max-w-6xl mx-auto px-4 pt-28 pb-20">
+    
+    <!-- Section Hero : identité et contexte -->
+    <div class="flex flex-col lg:flex-row justify-between items-center gap-12 mb-24" data-aos="fade-up" data-aos-duration="800">
+      <div class="flex-1 space-y-5">
+        <div class="inline-flex items-center gap-2 bg-indigo-500/20 rounded-full px-4 py-1.5 border border-indigo-400/40">
+          <i class="fas fa-microchip text-indigo-300 text-xs"></i>
+          <span class="text-xs font-medium tracking-wide">RAPPORT D'AUDIT • JUIN 2026</span>
+        </div>
+        <h1 class="text-5xl md:text-7xl font-bold tracking-tight bg-gradient-to-r from-white via-indigo-200 to-blue-300 bg-clip-text text-transparent leading-tight">
+          Audit Qualité Logicielle & Infrastructure
+        </h1>
+        <p class="text-lg text-gray-300 max-w-xl leading-relaxed">
+          Diagnostic technique, conformité ISTQB, robustesse OWASP et recette applicative pour <span class="text-indigo-300 font-medium">Honey Group</span>.
+        </p>
+        <div class="flex flex-wrap gap-4 pt-4">
+          <div class="flex items-center gap-2 text-sm bg-white/5 rounded-full px-4 py-2 backdrop-blur-sm">
+            <i class="fas fa-check-circle text-emerald-400"></i> 8 anomalies identifiées
+          </div>
+          <div class="flex items-center gap-2 text-sm bg-white/5 rounded-full px-4 py-2 backdrop-blur-sm">
+            <i class="fas fa-chart-line text-indigo-400"></i> LCP 0.21s (Excellent)
+          </div>
+          <div class="flex items-center gap-2 text-sm bg-white/5 rounded-full px-4 py-2 backdrop-blur-sm">
+            <i class="fas fa-shield-alt text-amber-400"></i> XSS mitigé
+          </div>
+        </div>
+      </div>
+      <div class="flex-1 flex justify-center" data-aos="fade-left">
+        <div class="glass-card rounded-2xl p-4 w-64 h-64 flex flex-col items-center justify-center backdrop-blur-md animate-float">
+          <i class="fas fa-chart-simple text-6xl text-indigo-300 mb-3"></i>
+          <span class="text-4xl font-black text-white">96<span class="text-indigo-300 text-2xl">%</span></span>
+          <span class="text-xs text-gray-300 mt-1">Score Lighthouse Performance</span>
+          <div class="w-full bg-gray-700 rounded-full h-1.5 mt-3">
+            <div class="bg-indigo-400 h-1.5 rounded-full w-[96%]"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Résumé méthodologique + métriques -->
+    <div id="resume" class="glass-panel p-6 md:p-10 rounded-3xl mb-24" data-aos="fade-up">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6 border-b border-white/10 pb-8 mb-6">
+        <div>
+          <i class="fas fa-chalkboard-user text-2xl text-indigo-300 mb-2 block"></i>
+          <div class="stat-number countup" data-target="12">0</div>
+          <div class="text-xs uppercase tracking-wider text-gray-400">Jours d'audit</div>
+        </div>
+        <div>
+          <i class="fas fa-bug text-2xl text-indigo-300 mb-2 block"></i>
+          <div class="stat-number countup" data-target="8">0</div>
+          <div class="text-xs uppercase tracking-wider text-gray-400">Anomalies recensées</div>
+        </div>
+        <div>
+          <i class="fas fa-shield-virus text-2xl text-indigo-300 mb-2 block"></i>
+          <div class="stat-number countup" data-target="100">0<span class="text-indigo-300 text-xl">%</span></div>
+          <div class="text-xs uppercase tracking-wider text-gray-400">XSS Protection</div>
+        </div>
+        <div>
+          <i class="fas fa-cloud-arrow-up text-2xl text-indigo-300 mb-2 block"></i>
+          <div class="stat-number countup" data-target="0.21">0<span class="text-indigo-300 text-xl">s</span></div>
+          <div class="text-xs uppercase tracking-wider text-gray-400">LCP (Core Web Vitals)</div>
+        </div>
+      </div>
+      <p class="text-gray-300 leading-relaxed text-justify">
+        <span class="text-indigo-300 font-semibold">ISTQB Black-box Testing · Shift-Left · OWASP</span> — Audit exhaustif du framework Django/Python d’Honey Group.
+        Conformité documentaire, tests de robustesse, responsive design, sécurité applicative et performance environnementale. 
+        <strong class="text-white">Conclusion : infrastructure solide mais correctifs critiques à prioriser (contact, mix content, sécurité).</strong>
+      </p>
+    </div>
+
+    <!-- TABLEAU DES ANOMALIES (CARD GRID) -->
+    <div id="anomalies" class="mb-24">
+      <div class="flex items-center gap-3 mb-8">
+        <i class="fas fa-table-list text-3xl text-indigo-300"></i>
+        <h2 class="text-3xl md:text-4xl font-bold">Cartographie des anomalies</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6" data-aos="fade-up">
+        <!-- Carte Critique -->
+        <div class="glass-card p-5 border-l-8 border-red-500 hover:shadow-red-500/20">
+          <div class="flex justify-between items-start">
+            <div><i class="fas fa-skull-crosswalk text-red-400 text-2xl"></i></div>
+            <span class="bg-red-900/50 text-red-200 text-xs px-3 py-1 rounded-full">CRITIQUE</span>
+          </div>
+          <h3 class="text-xl font-bold mt-2">ANM-ST-03 · SECRET_KEY exposée</h3>
+          <p class="text-gray-300 text-sm mt-1">Clé de production visible en clair sur Alwaysdata → risque d’usurpation et compromission de sessions.</p>
+        </div>
+        <!-- Majeures : 6 items (je les fusionne avec style) -->
+        <div class="glass-card p-5 border-l-8 border-orange-400">
+          <div class="flex justify-between"><i class="fas fa-exclamation-triangle text-orange-400"></i><span class="bg-orange-800/50 text-orange-200 text-xs px-2 py-0.5 rounded">MAJEUR</span></div>
+          <h3 class="text-xl font-bold mt-2">ANM-ST-01/02 · Docs & WSGI path</h3>
+          <p class="text-sm text-gray-300">PYTHONPATH erroné et chemin WSGI différent entre doc et réel → crash en préprod.</p>
+        </div>
+        <div class="glass-card p-5 border-l-8 border-orange-400">
+          <div class="flex justify-between"><i class="fas fa-mobile-alt text-orange-400"></i><span class="bg-orange-800/50 text-orange-200 text-xs px-2 py-0.5 rounded">MAJEUR</span></div>
+          <h3 class="text-xl font-bold mt-2">ANM-FUN-01 · Menu burger responsive</h3>
+          <p class="text-sm text-gray-300">Superposition des éléments sur iPhone SE, texte illisible sur portfolio.</p>
+        </div>
+        <div class="glass-card p-5 border-l-8 border-orange-400">
+          <div class="flex justify-between"><i class="fas fa-paper-plane text-orange-400"></i><span class="bg-orange-800/50 text-orange-200 text-xs px-2 py-0.5 rounded">MAJEUR</span></div>
+          <h3 class="text-xl font-bold mt-2">ANM-FUN-03 · Crash formulaire travelcrm</h3>
+          <p class="text-sm text-gray-300">Double alert (succès + erreur NoReverseMatch) → bloquant canal conversion.</p>
+        </div>
+        <div class="glass-card p-5 border-l-8 border-orange-400">
+          <div class="flex justify-between"><i class="fas fa-language text-orange-400"></i><span class="bg-orange-800/50 text-orange-200 text-xs px-2 py-0.5 rounded">MAJEUR</span></div>
+          <h3 class="text-xl font-bold mt-2">ANM-FUN-04 · I18n omissions</h3>
+          <p class="text-sm text-gray-300">Traduction anglaise incomplète (navbar, pages Agency).</p>
+        </div>
+        <div class="glass-card p-5 border-l-8 border-orange-400">
+          <div class="flex justify-between"><i class="fas fa-lock text-orange-400"></i><span class="bg-orange-800/50 text-orange-200 text-xs px-2 py-0.5 rounded">MAJEUR</span></div>
+          <h3 class="text-xl font-bold mt-2">ANM-SECU-01 · Mixed content HTTPS</h3>
+          <p class="text-sm text-gray-300">Ressources HTTP → cadenas absent, vulnérabilité Man-in-the-Middle.</p>
+        </div>
+        <div class="glass-card p-5 border-l-8 border-orange-400">
+          <div class="flex justify-between"><i class="fas fa-robot text-orange-400"></i><span class="bg-orange-800/50 text-orange-200 text-xs px-2 py-0.5 rounded">MAJEUR</span></div>
+          <h3 class="text-xl font-bold mt-2">ANM-SECU-02 · Absence Honeypot</h3>
+          <p class="text-sm text-gray-300">Formulaire sans anti-bot → risque Spam Flooding.</p>
+        </div>
+        <div class="glass-card p-5 border-l-8 border-yellow-500">
+          <div class="flex justify-between"><i class="fas fa-tablet-alt text-yellow-400"></i><span class="bg-yellow-800/40 text-yellow-200 text-xs px-2 py-0.5 rounded">MINEUR</span></div>
+          <h3 class="text-xl font-bold mt-2">ANM-FUN-02 · Défaut tablette</h3>
+          <p class="text-sm text-gray-300">Bouton Contact sur fond noir + puce parasite.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section Sécurité + graphiques de conformité (avec barres progress) -->
+    <div id="securite" class="mb-24">
+      <div class="flex items-center gap-3 mb-8">
+        <i class="fas fa-shield-haltered text-3xl text-indigo-300"></i>
+        <h2 class="text-3xl md:text-4xl font-bold">Robustesse & Sécurité OWASP</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8" data-aos="zoom-in-up">
+        <!-- Mixed Content -->
+        <div class="glass-card p-6 flex flex-col">
+          <i class="fas fa-globe text-2xl text-amber-300 mb-2"></i>
+          <h3 class="text-xl font-semibold">Mixed Content</h3>
+          <div class="mt-3">
+            <div class="flex justify-between text-sm"><span>HTTPS strict</span><span id="mixedScoreText" class="text-red-300">Non conforme</span></div>
+            <div class="w-full bg-gray-700 rounded-full h-2 mt-1"><div id="mixedBar" class="bg-red-500 h-2 rounded-full w-[10%]"></div></div>
+          </div>
+          <p class="text-xs text-gray-400 mt-3">Ressources mixtes empêchent le cadenas · Recommandation : URLs relatives ou https:// forcé.</p>
+        </div>
+        <!-- XSS Protection (Conforme) -->
+        <div class="glass-card p-6 flex flex-col">
+          <i class="fab fa-js text-2xl text-emerald-300"></i>
+          <h3 class="text-xl font-semibold">XSS Injection</h3>
+          <div class="mt-3"><div class="flex justify-between"><span>Auto-escaping Django</span><span class="text-emerald-300">100% conforme</span></div>
+          <div class="w-full bg-gray-700 rounded-full h-2 mt-1"><div class="bg-emerald-500 h-2 rounded-full w-full"></div></div></div>
+          <p class="text-xs text-gray-400 mt-3">Tentative script neutralisée → protection robuste.</p>
+        </div>
+        <!-- Anti-bot Honeypot -->
+        <div class="glass-card p-6 flex flex-col">
+          <i class="fas fa-bug-slash text-2xl text-rose-300"></i>
+          <h3 class="text-xl font-semibold">Protection Anti-Bot</h3>
+          <div class="mt-3"><div class="flex justify-between"><span>Honeypot implémenté</span><span class="text-rose-300">ABSENT</span></div>
+          <div class="w-full bg-gray-700 rounded-full h-2 mt-1"><div id="honeypotBar" class="bg-rose-500 h-2 rounded-full w-[0%]"></div></div></div>
+          <p class="text-xs text-gray-400 mt-3">Manque un champ honey pot / rate-limiting. Risque spam flooding majeur.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Visualisation timeline / anomalies par sévérité dynamique -->
+    <div class="glass-panel p-8 rounded-3xl mb-24" data-aos="fade-up">
+      <div class="grid md:grid-cols-2 gap-8">
+        <div>
+          <h3 class="text-2xl font-semibold flex items-center gap-2"><i class="fas fa-chart-pie text-indigo-300"></i> Gravité des anomalies</h3>
+          <div class="space-y-4 mt-6">
+            <div><div class="flex justify-between"><span>Critique</span><span id="critCount">1</span></div><div class="w-full bg-gray-700 rounded-full h-2"><div class="bg-red-500 h-2 rounded-full" style="width: 12.5%"></div></div></div>
+            <div><div class="flex justify-between"><span>Majeure</span><span id="majCount">6</span></div><div class="w-full bg-gray-700 rounded-full h-2"><div class="bg-orange-500 h-2 rounded-full" style="width: 75%"></div></div></div>
+            <div><div class="flex justify-between"><span>Mineure</span><span id="minCount">1</span></div><div class="w-full bg-gray-700 rounded-full h-2"><div class="bg-yellow-500 h-2 rounded-full" style="width: 12.5%"></div></div></div>
+          </div>
+        </div>
+        <div class="border-l border-white/10 pl-6">
+          <h3 class="text-2xl font-semibold"><i class="fas fa-chart-line mr-2 text-indigo-300"></i> Performance & Core Web Vitals</h3>
+          <ul class="mt-4 space-y-3 text-sm">
+            <li class="flex justify-between border-b border-white/10 pb-1"><span>LCP (Largest Contentful Paint)</span><span class="text-emerald-300 font-mono">0.21 s ✅</span></li>
+            <li class="flex justify-between border-b border-white/10 pb-1"><span>CLS (Cumulative Layout Shift)</span><span class="text-emerald-300">0 💎</span></li>
+            <li class="flex justify-between border-b border-white/10 pb-1"><span>HTTP/2.0 + Cache</span><span class="text-blue-300">Actif</span></li>
+            <li class="flex justify-between"><span>Temps de réponse POST contact</span><span class="text-white">5ms ⚡</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Conclusion & Apports -->
+    <div id="conclusion" class="glass-card p-8 md:p-12 rounded-3xl text-center md:text-left" data-aos="fade-up">
+      <i class="fas fa-check-double text-indigo-300 text-4xl mb-4 block"></i>
+      <h2 class="text-3xl font-bold mb-4">Conclusion d'expertise QA</h2>
+      <p class="text-gray-200 leading-relaxed max-w-3xl mx-auto">
+        Infrastructure Alwaysdata fiable, score LCP exceptionnel et sécurité XPS robuste.  
+        <strong class="text-indigo-300">Mais des freins critiques :</strong> SECRET_KEY en clair, crash du formulaire de conversion travelcrm, 
+        mixed content HTTPS, absence d’anti-bot. La viabilité à long terme passe par la correction des anomalies majeures et une roadmap priorisée.
+        <br><br>Méthodologie ISTQB et approche boîte noire ont permis un diagnostic précis — livrable actionnable pour l’équipe technique.
+      </p>
+      <div class="flex flex-wrap justify-center gap-3 mt-8">
+        <div class="bg-white/10 rounded-full px-5 py-2 text-sm"><i class="fas fa-brain mr-1"></i> Shift-Left static testing</div>
+        <div class="bg-white/10 rounded-full px-5 py-2 text-sm"><i class="fas fa-chart-simple mr-1"></i> Sanity check & logs uWSGI</div>
+        <div class="bg-white/10 rounded-full px-5 py-2 text-sm"><i class="fas fa-graduation-cap mr-1"></i> Référentiel OWASP Top 10</div>
+      </div>
+    </div>
+
+    <!-- Footer signature -->
+    <footer class="mt-20 text-center text-gray-500 text-sm border-t border-white/10 pt-8">
+      <p>© 2026 Karim Sabri — Concepteur Développeur / Spécialiste Assurance Qualité | Rapport d’audit Honey Group</p>
+      <p class="text-xs mt-1">Basé sur le rapport final complet — conformité ISTQB CTFL v4.0</p>
+    </footer>
+  </main>
+
+  <!-- AOS init -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 700, once: true, offset: 80 });
+    
+    // Animated counter pour les statistiques
+    const counters = document.querySelectorAll('.countup');
+    const animateNumber = (el) => {
+      const target = parseFloat(el.getAttribute('data-target'));
+      let current = 0;
+      const increment = target / 45;
+      const update = () => {
+        if(current < target) {
+          current += increment;
+          if(current >= target) current = target;
+          if(Number.isInteger(target)) el.innerText = Math.floor(current);
+          else el.innerText = current.toFixed(2);
+          requestAnimationFrame(update);
+        } else {
+          el.innerText = target;
+        }
+      };
+      update();
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting) {
+          const el = entry.target;
+          animateNumber(el);
+          observer.unobserve(el);
+        }
+      });
+    }, { threshold: 0.3 });
+    
+    counters.forEach(c => observer.observe(c));
+    
+    // Petits ajustements visuels pour les textes des progress bars
+    document.getElementById('mixedBar').style.width = '10%';
+    document.getElementById('honeypotBar').style.width = '0%';
+    document.getElementById('mixedScoreText').innerHTML = 'Non conforme (mixed content)';
+    const critSpan = document.getElementById('critCount');
+    const majSpan = document.getElementById('majCount');
+    const minSpan = document.getElementById('minCount');
+    if(critSpan) critSpan.innerText = '1';
+    if(majSpan) majSpan.innerText = '6';
+    if(minSpan) minSpan.innerText = '1';
+  </script>
+  <style>
+    @keyframes pulse-glow {
+      0% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4); }
+      70% { box-shadow: 0 0 0 12px rgba(99, 102, 241, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0); }
+    }
+    .glass-card:hover {
+      animation: pulse-glow 1s ease-out 1;
+    }
+    body {
+      overflow-x: hidden;
+    }
+  </style>
+</body>
+</html>
