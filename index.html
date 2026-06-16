@@ -3,18 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Karim Sabri — Rapport d'Audit QA (Honey Group)</title>
+    <title>Karim Sabri — Rapport d'Audit QA & Infrastructure (Honey Group)</title>
     <style>
-        /* --- ACCORD DESIGN AVEC TON SITE PORTFOLIO (LIGHT & MINIMALIST) --- */
+        /* --- CHARTE GRAPHIQUE ÉPURÉE & MINIMALISTE (STYLE PORTFOLIO) --- */
         :root {
             --bg-main: #ffffff;
             --bg-secondary: #f5f5f7;
+            --bg-accent: #fafdff;
             --text-main: #1d1d1f;
             --text-muted: #86868b;
             --border-color: #d2d2d7;
-            
-            /* Couleurs de sévérité adoucies pour fitter le design épuré */
             --accent-blue: #0066cc;
+            
+            /* Sévérités QA */
             --danger-soft: #ffefef;
             --danger-text: #d9383a;
             --warning-soft: #fff7e6;
@@ -39,13 +40,13 @@
             flex-direction: column;
         }
 
-        /* --- NAVIGATION MINIMALISTE (STYLE APPLE / PORTFOLIO) --- */
+        /* --- BARRE DE NAVIGATION (FIXE & DESIGN) --- */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.5rem 4rem;
-            background-color: rgba(255, 255, 255, 0.8);
+            padding: 1.2rem 4rem;
+            background-color: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border-color);
             position: sticky;
@@ -54,16 +55,15 @@
         }
 
         .brand h1 {
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             font-weight: 600;
             letter-spacing: -0.02em;
         }
         .brand span {
             color: var(--text-muted);
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 400;
             display: block;
-            margin-top: 2px;
         }
 
         nav {
@@ -75,7 +75,7 @@
             background: none;
             border: none;
             color: var(--text-muted);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 500;
             cursor: pointer;
             padding: 0.5rem 0;
@@ -83,16 +83,8 @@
             transition: color 0.2s ease;
         }
 
-        .nav-btn:hover {
-            color: var(--text-main);
-        }
-
-        .nav-btn.active {
-            color: var(--text-main);
-            font-weight: 600;
-        }
-
-        /* Ligne discrète sous l'onglet actif comme sur les portfolios modernes */
+        .nav-btn:hover { color: var(--text-main); }
+        .nav-btn.active { color: var(--text-main); font-weight: 600; }
         .nav-btn.active::after {
             content: '';
             position: absolute;
@@ -103,13 +95,13 @@
             background-color: var(--text-main);
         }
 
-        /* --- MISE EN PAGE DU CONTENU --- */
+        /* --- STRUCTURE DE LA PAGE --- */
         main {
             flex: 1;
-            max-width: 1100px;
+            max-width: 1200px;
             width: 100%;
             margin: 0 auto;
-            padding: 4rem 2rem;
+            padding: 3.5rem 2rem;
         }
 
         .view-section {
@@ -117,85 +109,123 @@
             animation: fadeIn 0.4s ease-out forwards;
         }
 
-        .view-section.active {
-            display: block;
-        }
+        .view-section.active { display: block; }
 
-        /* --- TITRES ET TITRAILLE --- */
+        /* --- INTRODUCTIONS DE SECTIONS --- */
         .hero {
-            margin-bottom: 3.5rem;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 2rem;
         }
-
         .hero h2 {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             font-weight: 700;
             letter-spacing: -0.03em;
-            margin-bottom: 0.75rem;
-            color: var(--text-main);
+            margin-bottom: 0.5rem;
         }
-
         .hero p {
             color: var(--text-muted);
-            font-size: 1.2rem;
-            font-weight: 400;
+            font-size: 1.15rem;
             line-height: 1.5;
-            max-width: 800px;
+            max-width: 900px;
         }
 
-        /* --- GRILLE DES MÉTRIQUES (KPI) --- */
+        /* --- BLOCS DE COMPÉTENCES & SOUTENANCES --- */
+        .grid-two-cols {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .content-card {
+            background-color: var(--bg-secondary);
+            border-radius: 14px;
+            padding: 2rem;
+            border: 1px solid transparent;
+            transition: border-color 0.2s ease;
+        }
+        .content-card:hover {
+            border-color: #d2d2d7;
+        }
+        .content-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .content-card h3 .badge-block {
+            font-size: 0.75rem;
+            background: #e8e8ed;
+            padding: 0.2rem 0.5rem;
+            border-radius: 6px;
+            color: var(--text-main);
+            font-weight: 500;
+        }
+        .content-card p {
+            color: #424245;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        .content-card ul {
+            padding-left: 1.25rem;
+            color: #424245;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        .content-card ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* --- BLOC GLOSSAIRE / CONTEXTE IMMÉDIAT --- */
+        .glossary-bar {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 2.5rem;
+            background: var(--bg-accent);
+            padding: 1.25rem;
+            border-radius: 10px;
+            border: 1px solid #e1f0ff;
+        }
+        .glossary-item {
+            font-size: 0.85rem;
+            color: #004494;
+        }
+        .glossary-item strong { color: var(--text-main); }
+
+        /* --- TABLEAU DE BORD INTERACTIF (DASHBOARD) --- */
         .kpi-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 1rem;
-            margin-bottom: 4rem;
+            margin-bottom: 3rem;
         }
-
         .kpi-card {
             background-color: var(--bg-secondary);
             border-radius: 12px;
             padding: 1.5rem;
-            border: 1px solid transparent;
-            transition: all 0.2s ease;
+            text-align: center;
         }
+        .kpi-card .value { font-size: 2.2rem; font-weight: 700; margin-bottom: 0.25rem; }
+        .kpi-card .label { color: var(--text-muted); font-size: 0.8rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.03em; }
 
-        .kpi-card:hover {
-            background-color: #ededf0;
-        }
-
-        .kpi-card .value {
-            font-size: 2rem;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            margin-bottom: 0.25rem;
-        }
-
-        .kpi-card .label {
-            color: var(--text-muted);
-            font-size: 0.8rem;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.03em;
-        }
-
-        /* --- SÉPARATEURS INTERACTIFS D'ANOMALIES --- */
         .filter-bar {
             display: flex;
             align-items: center;
             gap: 0.75rem;
             margin-bottom: 2rem;
-            border-bottom: 1px solid var(--border-color);
             padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
         }
-
-        .filter-label {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            margin-right: 0.5rem;
-        }
-
+        .filter-label { font-size: 0.9rem; color: var(--text-muted); }
         .filter-badge {
             background: var(--bg-secondary);
-            border: 1px solid transparent;
+            border: none;
             color: var(--text-main);
             padding: 0.4rem 1.1rem;
             border-radius: 20px;
@@ -204,78 +234,53 @@
             cursor: pointer;
             transition: all 0.2s;
         }
+        .filter-badge:hover { background-color: #ededf0; }
+        .filter-badge.active { background-color: var(--text-main); color: var(--bg-main); }
 
-        .filter-badge:hover {
-            background-color: #ededf0;
-        }
-
-        .filter-badge.active {
-            background-color: var(--text-main);
-            color: var(--bg-main);
-        }
-
-        /* --- GRILLE ET CARTES DU TABLEAU DE BORD --- */
+        /* CARTES ANOMALIES COMPLÈTES */
         .anomalies-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 1.5rem;
         }
-
         .anomaly-card {
             background: var(--bg-main);
             border: 1px solid var(--border-color);
             border-radius: 12px;
-            padding: 1.5rem;
+            padding: 1.75rem;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            transition: all 0.2s ease;
         }
-
         .anomaly-card:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
             border-color: #86868b;
         }
-
         .anomaly-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 1rem;
         }
-
-        .anomaly-id {
-            font-family: monospace;
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--text-muted);
-        }
-
-        .severity-badge {
-            font-size: 0.75rem;
-            font-weight: 600;
-            padding: 0.25rem 0.6rem;
-            border-radius: 6px;
-        }
-        
-        /* Badges clairs et élégants conformes à une UI épurée */
+        .anomaly-id { font-family: monospace; font-size: 0.85rem; font-weight: 600; color: var(--text-muted); }
+        .severity-badge { font-size: 0.75rem; font-weight: 600; padding: 0.25rem 0.6rem; border-radius: 6px; }
         .severity-badge.critique { background-color: var(--danger-soft); color: var(--danger-text); }
         .severity-badge.majeure { background-color: var(--warning-soft); color: var(--warning-text); }
         .severity-badge.mineure { background-color: var(--success-soft); color: var(--success-text); }
-
-        .anomaly-title {
-            font-size: 1.15rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            letter-spacing: -0.01em;
-        }
-
-        .anomaly-desc {
+        
+        .anomaly-title { font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: -0.01em; }
+        .anomaly-desc { color: #424245; font-size: 0.95rem; line-height: 1.5; margin-bottom: 1.25rem; }
+        
+        .anomaly-impact {
+            background: #fafafa;
+            border-left: 3px solid #d2d2d7;
+            padding: 0.6rem 0.8rem;
+            font-size: 0.88rem;
             color: #515154;
-            font-size: 0.95rem;
-            line-height: 1.5;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.25rem;
+            border-radius: 0 4px 4px 0;
         }
 
         .anomaly-meta {
@@ -287,39 +292,15 @@
             justify-content: space-between;
         }
 
-        /* --- BLOCS DE TEXTE DU RAPPORT --- */
-        .info-block {
-            background-color: var(--bg-secondary);
-            border-radius: 12px;
-            padding: 2rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .info-block h3 {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 0.75rem;
-            letter-spacing: -0.02em;
-        }
-
-        .info-block p {
-            color: #515154;
-            font-size: 1.05rem;
-            line-height: 1.6;
-        }
-
         /* --- ANIMATIONS --- */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(6px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* RESPONSIVE SUBTIL */
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
             header { padding: 1.5rem 2rem; flex-direction: column; gap: 1rem; align-items: flex-start; }
-            .kpi-grid { grid-template-columns: repeat(2, 1fr); }
-            .anomalies-grid { grid-template-columns: 1fr; }
-            .filter-bar { flex-wrap: wrap; }
+            .grid-two-cols, .kpi-grid, .anomalies-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -328,161 +309,261 @@
     <header>
         <div class="brand">
             <h1>Karim Sabri</h1>
-            <span>Rapport d'Audit Qualité & Infrastructure — Honey Group</span>
+            <span>Dossier Technique & Restitution d'Audit — Honey Group (2026)</span>
         </div>
         <nav>
-            <button class="nav-btn active" onclick="switchView('dashboard')">Dashboard</button>
-            <button class="nav-btn" onclick="switchView('contexte')">Mission & Méthodologie</button>
-            <button class="nav-btn" onclick="switchView('bilan')">Conclusions</button>
+            <button class="nav-btn active" onclick="switchView('introduction')">1. Contexte & Structure</button>
+            <button class="nav-btn" onclick="switchView('competences')">2. Activités & Compétences</button>
+            <button class="nav-btn" onclick="switchView('dashboard')">3. Registre des Anomalies</button>
+            <button class="nav-btn" onclick="switchView('bilan')">4. Bilan & Viabilité</button>
         </nav>
     </header>
 
     <main>
         
-        <section id="dashboard-view" class="view-section active">
+        <section id="introduction-view" class="view-section active">
             <div class="hero">
-                <h2>Rapport de Campagne de Recette</h2>
-                <p>Analyse globale des performances de l'infrastructure Cloud (Alwaysdata) et audit boîte noire de l'application Django.</p>
+                <h2>Introduction Générale & Objectifs de l'Audit</h2>
+                <p>Analyse de la robustesse globale, de l'alignement des configurations et de la qualité fonctionnelle de la plateforme Web et CRM de l'organisme d'accueil.</p>
+            </div>
+
+            <div class="glossary-bar">
+                <span class="glossary-item"><strong>Méthodologie principale :</strong> ISTQB Certified Tester Foundation Level (v4.0)</span>
+                <span class="glossary-item"><strong>Normes de Sécurité :</strong> OWASP Top 10 Application Security Risks</span>
+                <span class="glossary-item"><strong>Stratégie de test :</strong> Shift-Left Testing (Validation précoce des spécifications et des environnements)</span>
+            </div>
+
+            <div class="grid-two-cols">
+                <div class="content-card">
+                    <h3>Problématique de la Mission</h3>
+                    <p>Honey Group a migré son infrastructure applicative et son catalogue d'offres vers une architecture moderne articulée autour du framework <strong>Python / Django</strong> et d'un hébergement Cloud managé sur <strong>Alwaysdata</strong>.</p>
+                    <p>L'enjeu de cet audit est de quantifier la viabilité technique de cette vitrine internationale avant sa mise en production intensive. L'objectif consiste à détecter les anomalies de configuration, les régressions d'affichage (UI), les crashs fonctionnels et les potentielles fuites d'informations critiques.</p>
+                </div>
+
+                <div class="content-card">
+                    <h3>Périmètre et Conditions d'Exécution</h3>
+                    <p>L'intégralité des travaux a été menée au cours de la période de stage de **juin 2026** sous une posture d'auditeur QA indépendant.</p>
+                    <ul>
+                        <li><strong>Tests Statiques :</strong> Analyse de la configuration du panel d'hébergement, des variables d'environnement et du chiffrement SSL.</li>
+                        <li><strong>Tests Dynamiques (Boîte Noire) :</strong> Exploration systématique des parcours utilisateurs, validation des modules de contacts (TravelCRM) et vérification du responsive multi-résolution.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="competences-view" class="view-section">
+            <div class="hero">
+                <h2>Activités Réalisées par Blocs de Compétences</h2>
+                <p>Mise en correspondance directe des actions menées sur le terrain avec les exigences du référentiel d'évaluation.</p>
+            </div>
+
+            <div class="grid-two-cols">
+                <div class="content-card">
+                    <h3>Audit de Configuration & Environnement <span class="badge-block">Bloc 1</span></h3>
+                    <p><strong>Static Testing & Sanity Check :</strong> Validation de la concordance entre l'environnement théorique cible et l'implémentation réelle constatée sur le serveur Alwaysdata.</p>
+                    <ul>
+                        <li>Analyse de la configuration du serveur web, des redirections de flux et de la distribution des ressources statiques.</li>
+                        <li>Mesure de la rapidité de réponse : Constat d'un excellent niveau d'optimisation avec un <strong>Largest Contentful Paint (LCP) mesuré à 0,21 seconde</strong> via Google Lighthouse.</li>
+                        <li>Mise en évidence de mauvaises pratiques d'isolation des secrets de production (variables d'environnement).</li>
+                    </ul>
+                </div>
+
+                <div class="content-card">
+                    <h3>Audit Fonctionnel Détaillé <span class="badge-block">Bloc 2</span></h3>
+                    <p><strong>Black-box Testing :</strong> Exécution de scénarios nominaux et aux limites sur l'ensemble des fonctionnalités front-end et back-end exposées à l'utilisateur.</p>
+                    <ul>
+                        <li>Vérification du routage applicatif et des mécanismes de traitement des requêtes POST/GET.</li>
+                        <li>Identification d'un crash bloquant (Exception de routage) lors de l'envoi de formulaires métiers.</li>
+                        <li>Tests d'utilisabilité et d'accessibilité multi-plateformes (Desktop, Tablettes Poco Pad, terminaux mobiles iPhone SE).</li>
+                    </ul>
+                </div>
+
+                <div class="content-card">
+                    <h3>Sécurité & Robustesse Applicative <span class="badge-block">Bloc 3</span></h3>
+                    <p><strong>Normes OWASP :</strong> Évaluation de l'étanchéité de la plateforme face aux vulnérabilités courantes du web et aux tentatives d'exploitation malveillantes.</p>
+                    <ul>
+                        <li>Analyse de l'intégrité des flux de données et du maintien du chiffrement de bout en bout (SSL/TLS).</li>
+                        <li>Vérification des protections contre le traitement automatisé de requêtes (anti-botting).</li>
+                        <li>Évaluation de la résilience du framework Django face aux injections de scripts tiers (XSS).</li>
+                    </ul>
+                </div>
+
+                <div class="content-card" style="background-color: var(--bg-accent); border: 1px solid #d2d2d7;">
+                    <h3>Rigueur de l'Ingénieur QA</h3>
+                    <p>Chaque anomalie détectée a fait l'objet d'un isolement strict des conditions de reproduction, d'une classification normalisée selon sa sévérité (Critique, Majeure, Mineure) et d'un calcul d'impact direct sur l'activité commerciale de Honey Group.</p>
+                    <p>Cette approche garantit au plan de remédiation une efficacité maximale pour les équipes de développement.</p>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="dashboard-view" class="view-section">
+            <div class="hero">
+                <h2>Registre de Recette & Tableau de Synthèse des Anomalies</h2>
+                <p>Visualisation interactive de la totalité des faits techniques recensés. Utilisez les filtres pour naviguer au sein du registre d'audit.</p>
             </div>
 
             <div class="kpi-grid">
                 <div class="kpi-card">
                     <div class="value" style="color: var(--success-text);">0,21s</div>
-                    <div class="label">LCP (Lighthouse)</div>
-                </div>
-                <div class="kpi-card">
-                    <div class="value">HTTP/2</div>
-                    <div class="label">Protocole Serveur</div>
+                    <div class="label">Performance LCP</div>
                 </div>
                 <div class="kpi-card">
                     <div class="value" style="color: var(--danger-text);">1</div>
                     <div class="label">Faille Critique</div>
                 </div>
                 <div class="kpi-card">
-                    <div class="value" style="color: var(--warning-text);">7</div>
+                    <div class="value" style="color: var(--warning-text);">5</div>
                     <div class="label">Anomalies Majeures</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="value" style="color: var(--text-main);">2</div>
+                    <div class="label">Anomalies Mineures</div>
                 </div>
             </div>
 
             <div class="filter-bar">
-                <span class="filter-label">Sévérité :</span>
-                <button class="filter-badge active" onclick="filterAnomalies('all')">Toutes</button>
-                <button class="filter-badge" onclick="filterAnomalies('critique')">Critique</button>
-                <button class="filter-badge" onclick="filterAnomalies('majeure')">Majeures</button>
-                <button class="filter-badge" onclick="filterAnomalies('mineure')">Mineures</button>
+                <span class="filter-label">Filtrer par niveau de risque :</span>
+                <button class="filter-badge active" onclick="filterAnomalies('all')">Toutes (8)</button>
+                <button class="filter-badge" onclick="filterAnomalies('critique')">Critique (1)</button>
+                <button class="filter-badge" onclick="filterAnomalies('majeure')">Majeures (5)</button>
+                <button class="filter-badge" onclick="filterAnomalies('mineure')">Mineures (2)</button>
             </div>
 
-            <div class="anomalies-grid" id="anomalies-container">
+            <div class="anomalies-grid">
                 
                 <div class="anomaly-card" data-severity="critique">
                     <div>
                         <div class="anomaly-header">
-                            <span class="anomaly-id">ANM-ST-03</span>
+                            <span class="anomaly-id">ANM-ST-03 (Bloc 1 — Statique)</span>
                             <span class="severity-badge critique">Critique</span>
                         </div>
-                        <div class="anomaly-title">Exposition de la variable SECRET_KEY</div>
-                        <div class="anomaly-desc">La clé secrète de production est codée en dur et visible en clair sur le panel d'administration du serveur, invalidant la sécurité du chiffrement des sessions.</div>
+                        <div class="anomaly-title">Exposition de la variable SECRET_KEY en clair</div>
+                        <div class="anomaly-desc">La clé secrète de production permettant de signer les tokens de session et les cookies de l'infrastructure Django est codée en dur et visible directement depuis l'interface d'administration du serveur.</div>
+                        <div class="anomaly-impact"><strong>Impact :</strong> Compromission totale potentielle des sessions utilisateurs et falsification de jetons de sécurité.</div>
                     </div>
-                    <div class="anomaly-meta">
-                        <span>Périmètre : Infrastructure</span>
-                        <span>Statut : À corriger</span>
-                    </div>
+                    <div class="anomaly-meta"><span>Périmètre : Sécurité Infrastructure</span><span>Statut : À corriger</span></div>
                 </div>
 
                 <div class="anomaly-card" data-severity="majeure">
                     <div>
                         <div class="anomaly-header">
-                            <span class="anomaly-id">ANM-FUN-03</span>
+                            <span class="anomaly-id">ANM-FUN-03 (Bloc 2 — Fonctionnel)</span>
                             <span class="severity-badge majeure">Majeure</span>
                         </div>
-                        <div class="anomaly-title">Crash du formulaire TravelCRM</div>
-                        <div class="anomaly-desc">Exception NoReverseMatch levée lors de la soumission. La vue effectue une tentative de redirection vers une URL inexistante au lieu de 'contact-us'.</div>
+                        <div class="anomaly-title">Crash du formulaire TravelCRM (NoReverseMatch)</div>
+                        <div class="anomaly-desc">Lors de la validation et de la soumission du formulaire, le serveur lève une exception fatale HTTP 500. La vue back-end tente d'effectuer une redirection vers un nom de pattern d'URL inexistant au lieu d'appeler la route valide 'contact-us'.</div>
+                        <div class="anomaly-impact"><strong>Impact :</strong> Rupture complète du tunnel de conversion. Les prospects ne peuvent plus soumettre de demandes.</div>
                     </div>
-                    <div class="anomaly-meta">
-                        <span>Périmètre : Applicatif</span>
-                        <span>Statut : À corriger</span>
-                    </div>
+                    <div class="anomaly-meta"><span>Périmètre : Logique Applicative</span><span>Statut : À corriger</span></div>
                 </div>
 
                 <div class="anomaly-card" data-severity="majeure">
                     <div>
                         <div class="anomaly-header">
-                            <span class="anomaly-id">ANM-SECU-01</span>
+                            <span class="anomaly-id">ANM-SECU-01 (Bloc 3 — Sécurité)</span>
                             <span class="severity-badge majeure">Majeure</span>
                         </div>
-                        <div class="anomaly-title">Contenu Mixte (HTTPS Dégradé)</div>
-                        <div class="anomaly-desc">Appels de ressources statiques codés en dur via le protocole non sécurisé HTTP, bloquant le chiffrement SSL complet de la vitrine.</div>
+                        <div class="anomaly-title">Contenu Mixte (Désactivation SSL partiel)</div>
+                        <div class="anomaly-desc">Des ressources statiques et des scripts tiers essentiels sont appelés en dur via le protocole non sécurisé HTTP au lieu du protocole HTTPS forcé, ce qui dégrade l'indice de sécurité du navigateur.</div>
+                        <div class="anomaly-impact"><strong>Impact :</strong> Exposition des requêtes de ressources à des attaques de type Man-in-the-Middle.</div>
                     </div>
-                    <div class="anomaly-meta">
-                        <span>Périmètre : Sécurité</span>
-                        <span>Statut : À corriger</span>
-                    </div>
+                    <div class="anomaly-meta"><span>Périmètre : Chiffrement des Flux</span><span>Statut : À corriger</span></div>
                 </div>
 
                 <div class="anomaly-card" data-severity="majeure">
                     <div>
                         <div class="anomaly-header">
-                            <span class="anomaly-id">ANM-SECU-02</span>
+                            <span class="anomaly-id">ANM-SECU-02 (Bloc 3 — Sécurité)</span>
                             <span class="severity-badge majeure">Majeure</span>
                         </div>
-                        <div class="anomaly-title">Absence de protection anti-bot (Honeypot)</div>
-                        <div class="anomaly-desc">Le formulaire public de contact ne possède aucun mécanisme de filtrage invisible (pot de miel), exposant le CRM aux injections de Spam Flooding.</div>
+                        <div class="anomaly-title">Absence de protection anti-bot (Honeypot absent)</div>
+                        <div class="anomaly-desc">Le formulaire public d'acquisition ne présente aucun mécanisme de filtrage passif ou de champ leurre (pot de miel), permettant à des scripts automatisés d'injecter des données en masse.</div>
+                        <div class="anomaly-impact"><strong>Impact :</strong> Risque élevé de Spam Flooding saturant la base de données du CRM de l'entreprise.</div>
                     </div>
-                    <div class="anomaly-meta">
-                        <span>Périmètre : Sécurité</span>
-                        <span>Statut : À corriger</span>
+                    <div class="anomaly-meta"><span>Périmètre : Intégrité des Saisies</span><span>Statut : À corriger</span></div>
+                </div>
+
+                <div class="anomaly-card" data-severity="majeure">
+                    <div>
+                        <div class="anomaly-header">
+                            <span class="anomaly-id">ANM-FUN-01 (Bloc 2 — Fonctionnel)</span>
+                            <span class="severity-badge majeure">Majeure</span>
+                        </div>
+                        <div class="anomaly-title">Rupture responsive de la Navbar sur Mobile (iPhone SE)</div>
+                        <div class="anomaly-desc">Lors du basculement sur des résolutions compactes (largeur < 375px), le conteneur du menu de navigation principal ne déclenche pas le repliement en menu burger adaptatif.</div>
+                        <div class="anomaly-impact"><strong>Impact :</strong> Les liens de navigation se chevauchent, bloquant l'accès visuel aux premières sections pour les mobinautes.</div>
                     </div>
+                    <div class="anomaly-meta"><span>Périmètre : Interface Utilisateur (UI)</span><span>Statut : À corriger</span></div>
+                </div>
+
+                <div class="anomaly-card" data-severity="majeure">
+                    <div>
+                        <div class="anomaly-header">
+                            <span class="anomaly-id">ANM-ST-04 (Bloc 1 — Statique)</span>
+                            <span class="severity-badge majeure">Majeure</span>
+                        </div>
+                        <div class="anomaly-title">Absence d'activation du protocole HTTP/2</div>
+                        <div class="anomaly-desc">Les en-têtes réseau révèlent que les échanges s'effectuent via le protocole historique HTTP/1.1 sur certaines portions, empêchant le multiplexage des requêtes statiques.</div>
+                        <div class="anomaly-impact"><strong>Impact :</strong> Perte d'optimisation sur le chargement simultané des images du catalogue d'offres.</div>
+                    </div>
+                    <div class="anomaly-meta"><span>Périmètre : Performance Réseau</span><span>Statut : À corriger</span></div>
                 </div>
 
                 <div class="anomaly-card" data-severity="mineure">
                     <div>
                         <div class="anomaly-header">
-                            <span class="anomaly-id">ANM-FUN-01</span>
+                            <span class="anomaly-id">ANM-FUN-02 (Bloc 2 — Fonctionnel)</span>
                             <span class="severity-badge mineure">Mineure</span>
                         </div>
-                        <div class="anomaly-title">Omissions de traduction (I18n)</div>
-                        <div class="anomaly-desc">Plusieurs sections et boutons de l'interface n'intègrent pas les fichiers de dictionnaire requis, affichant des chaînes brutes impactant l'expérience sur la vitrine internationale.</div>
+                        <div class="anomaly-title">Puce parasite résiduelle sur onglet Tablette (Poco Pad)</div>
+                        <div class="anomaly-desc">Un défaut de ciblage dans la feuille de style CSS globale laisse apparaître une puce de liste (`list-style-type`) non neutralisée sur l'onglet actif lors d'une navigation au format tablette.</div>
+                        <div class="anomaly-impact"><strong>Impact :</strong> Défaut esthétique mineur sans blocage du parcours de navigation.</div>
                     </div>
-                    <div class="anomaly-meta">
-                        <span>Périmètre : Traduction</span>
-                        <span>Statut : À corriger</span>
+                    <div class="anomaly-meta"><span>Périmètre : Style CSS</span><span>Statut : À corriger</span></div>
+                </div>
+
+                <div class="anomaly-card" data-severity="mineure">
+                    <div>
+                        <div class="anomaly-header">
+                            <span class="anomaly-id">ANM-FUN-04 (Bloc 2 — Fonctionnel)</span>
+                            <span class="severity-badge mineure">Mineure</span>
+                        </div>
+                        <div class="anomaly-title">Omissions localisées de traduction (Internationalisation I18n)</div>
+                        <div class="anomaly-desc">Certaines balises de texte et messages d'erreur système secondaires n'intègrent pas les filtres de traduction de Django, affichant des chaînes en anglais sur la version française.</div>
+                        <div class="anomaly-impact"><strong>Impact :</strong> Légère altération de l'expérience utilisateur sur la vitrine internationale.</div>
                     </div>
+                    <div class="anomaly-meta"><span>Périmètre : Localisation</span><span>Statut : À corriger</span></div>
                 </div>
 
             </div>
         </section>
 
-        <section id="contexte-view" class="view-section">
-            <div class="hero">
-                <h2>Le Cadre de la Mission</h2>
-                <p>Présentation des méthodologies d'assurance qualité appliquées à la plateforme.</p>
-            </div>
-
-            <div class="info-block">
-                <h3>Rôle et Autonomie en Entreprise</h3>
-                <p>Pendant ce stage chez <strong>Honey Group</strong>, j'ai agi en tant que Spécialiste Assurance Qualité (QA). J'ai pris en charge de bout en bout l'établissement du plan de test, la qualification des bugs et l'analyse de robustesse de l'environnement de production.</p>
-            </div>
-
-            <div class="info-block">
-                <h3>Alignement Méthodologique (ISTQB CTFL v4.0)</h3>
-                <p>Les tests ont été structurés selon les normes internationales de l'<strong>ISTQB</strong>. J'ai alterné entre du <strong>Static Testing (Shift-Left)</strong> sur les configurations et fichiers de déploiement, et du <strong>Black-box Testing (Test en Boîte Noire)</strong> sur les parcours critiques utilisateurs (formulaires, authentification, responsive design).</p>
-            </div>
-        </section>
 
         <section id="bilan-view" class="view-section">
             <div class="hero">
-                <h2>Conclusions et Viabilité Technique</h2>
-                <p>Synthèse d'ingénierie logicielle sur la pérennité du produit web audité.</p>
+                <h2>Conclusion Générale & Perspectives de Viabilité</h2>
+                <p>Bilan synthétique et recommandations d'ingénierie logicielle pour assurer l'avenir du produit.</p>
             </div>
 
-            <div class="info-block">
-                <h3>Points Forts du Socle Applicatif</h3>
-                <p>La structure globale basée sur <strong>Python / Django</strong> s'avère parfaitement saine. Le site bénéficie des barrières de sécurité natives du framework, notamment la neutralisation totale des attaques par injection Cross-Site Scripting (XSS) grâce au mécanisme d'auto-échappement de Django. Du côté des performances pures, la réactivité serveur est excellente avec un <strong>LCP de 0,21s</strong>.</p>
+            <div class="grid-two-cols">
+                <div class="content-card" style="border-left: 4px solid var(--success-text);">
+                    <h3>Le Diagnostic Positif de l'Existant</h3>
+                    <p>L'architecture choisie par Honey Group repose sur des fondations solides. Le choix de **Python / Django** protège nativement l'application contre des attaques complexes telles que le **Cross-Site Scripting (XSS)** grâce à la gestion rigoureuse de l'auto-échappement des variables dans les templates HTML.</p>
+                    <p>De surcroît, la réactivité globale de l'hébergement Alwaysdata offre d'excellentes dispositions techniques d'affichage (LCP de 0,21s), garantissant une base hautement performante.</p>
+                </div>
+
+                <div class="content-card" style="border-left: 4px solid var(--danger-text);">
+                    <h3>Conditions Impératives de Viabilité</h3>
+                    <p>La pérennité de la plateforme reste assujettie à l'application rigoureuse du plan de remédiation déduit de cet audit. La résolution de l'exception **NoReverseMatch** sur le formulaire de contact est la priorité absolue pour rétablir la viabilité commerciale.</p>
+                    <p>La mise en sécurité de la clé d'infrastructure (`SECRET_KEY`) et le nettoyage des appels en contenu mixte finaliseront la mise en conformité de la plateforme, la rendant pleinement parée pour soutenir la croissance de l'entreprise.</p>
+                </div>
             </div>
 
-            <div class="info-block">
-                <h3>Plan de Remédiation Recommandé</h3>
-                <p>La viabilité à long terme de l'application reste conditionnée par un plan de correction immédiat. La résolution en priorité absolue du crash applicatif sur le formulaire de contact (l'exception NoReverseMatch) est vitale, car elle bloque actuellement le canal principal d'acquisition de l'entreprise. L'application des corrections de sécurité (Honeypot et Contenu Mixte) viendra sceller l'intégrité globale de la plateforme de Honey Group.</p>
+            <div class="content-card" style="background-color: var(--bg-accent); text-align: center; padding: 2.5rem;">
+                <h3 style="justify-content: center; margin-bottom: 0.5rem;">Bilan Personnel de la Période de Stage</h3>
+                <p style="max-width: 800px; margin: 0 auto;">Ce stage m'a permis de consolider mes compétences opérationnelles en ingénierie de test et d'appliquer avec rigueur les préceptes de la certification <strong>ISTQB Foundation Level</strong>. Travailler en totale autonomie sur un environnement réel m'a donné l'opportunité de lier de manière concrète les impératifs de la qualité logicielle aux objectifs stratégiques d'une entreprise.</p>
             </div>
         </section>
 
@@ -499,6 +580,7 @@
 
             document.getElementById(`${viewId}-view`).classList.add('active');
             event.currentTarget.classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function filterAnomalies(severity) {
